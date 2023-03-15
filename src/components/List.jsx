@@ -8,9 +8,10 @@ function List() {
       {MovieContext.movies?.map((movie, i) => {
         return (
           <Card
-            key={i + movie.title + movie.poster}
+            key={movie.title + movie.poster}
             title={movie.title}
             poster={movie.poster}
+            index={i}
           />
         );
       })}

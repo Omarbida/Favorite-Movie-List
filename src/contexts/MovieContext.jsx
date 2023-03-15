@@ -3,6 +3,7 @@ import { createContext, useCallback, useState } from "react";
 export const MovieContext = createContext({
   movies: [],
   addMovie: () => {},
+  removeMovie: () => {},
 });
 export const MovieProvider = (props) => {
   const [movies, setMovies] = useState([
@@ -33,8 +34,16 @@ export const MovieProvider = (props) => {
     },
     [movies]
   );
+  const removeMovie = useCallback(
+    (i) => {
+      let tempMovies = [...movies];
+      tempMovies.splice(i, 1);
+      setMovies(tempMovies);
+    },
+    [movies]
+  );
   return (
-    <MovieContext.Provider value={{ movies, addMovie }}>
+    <MovieContext.Provider value={{ movies, addMovie, removeMovie }}>
       {props.children}
     </MovieContext.Provider>
   );
